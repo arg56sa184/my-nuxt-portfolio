@@ -10,15 +10,9 @@ export default defineNuxtConfig({
       'graphql-client': {
         clients: {
           default: {
-            // 固定のURLではなく、環境変数を見るように変更します
-            host: process.env.GQL_HOST, 
-            retainToken: true,
-            // もしAPIキー（トークン）も環境変数にしているなら、ここに追加します
-            token: {
-              name: 'X-MICROCMS-API-KEY',
-              value: process.env.MICROCMS_API_KEY,
-              type: 'None'
-            }
+            // ここに直接、判明した本物のURLを書き込みます
+            host: 'https://arg56sa184.cloudfree.jp/blog/graphql',
+            retainToken: true
           }
         }
       }
