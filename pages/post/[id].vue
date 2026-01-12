@@ -1,28 +1,33 @@
 <script setup>
 const route = useRoute()
-const url = 'https://arg56sa184.cloudfree.jp/blog/graphql'
+const url = 'https://arg56sa184.cloudfree.jp/blog/graphql/'
 
+// URLの[id]部分を取得する
+const postId = route.params.id
+
+// 特定の1件だけを取得するクエリ
 const query = `
   query getPost($id: ID!) {
     post(id: $id, idType: DATABASE_ID) {
       title
-      content
       date
+      content
     }
   }
 `
 
-const { data, error } = await useAsyncData(`post-${route.params.id}`, () => 
+const { data, error } = await useAsyncData(`post-${postId}`, () => 
   $fetch(url, {
     method: 'POST',
     body: { 
       query,
-      variables: { id: route.params.id } 
+      variables: { id: postId } // IDをWordPressに伝える
     }
-  }), { server: false }
+  })
 )
 
 const formatDate = (dateStr) => {
+  if (!dateStr) return ''
   return new Date(dateStr).toLocaleDateString('ja-JP')
 }
 </script>
@@ -30,39 +35,30 @@ const formatDate = (dateStr) => {
 <template>
   <div class="min-h-screen bg-white py-12">
     <div class="max-w-3xl mx-auto px-4">
-      <NuxtLink to="/" class="text-emerald-600 hover:text-emerald-700 font-medium mb-8 inline-block">
+      <NuxtLink to="/" class="text-emerald-500 hover:text-emerald-700 mb-8 inline-block">
         ← 記事一覧に戻る
       </NuxtLink>
 
-      <article v-if="data?.data?.post">
-        <header class="mb-8 border-b border-gray-100 pb-8">
-          <span class="text-gray-500 text-sm">{{ formatDate(data.data.post.date) }}</span>
-          <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2">
+      <div v-if="data?.data?.post">
+        <header class="mb-8">
+          <p class="text-gray-500 text-sm mb-2">{{ formatDate(data.data.post.date) }}</p>
+          <h1 class="text-4xl font-bold text-gray-900 leading-tight">
             {{ data.data.post.title }}
           </h1>
         </header>
 
-        <div 
-  class="prose prose-slate max-w-none 
-         prose-headings:text-slate-900 
-         prose-p:text-slate-600 
-         prose-p:leading-relaxed
-         prose-h2:border-l-4 
-         prose-h2:border-emerald-500 
-         prose-h2:pl-4 
-         prose-h2:py-1
-         prose-h2:bg-slate-50"
-  v-html="data.data.post.content"
-></div>
-      </article>
+        <div class="prose prose-emerald max-w-none" v-html="data.data.post.content"></div>
+      </div>
 
       <div v-else-if="error" class="text-red-500">
         記事の読み込みに失敗しました。
       </div>
-      
-      <div v-else class="text-gray-500">
-        読み込み中...
-      </div>
     </div>
   </div>
 </template>
+
+<style>
+/* WordPressの本文（HTML）を綺麗に見せるための簡単なスタイル */
+.prose p { margin-bottom: 1.5rem; line-height: 1.8; color: #374151; }
+.prose h2 { font-size: 1.5rem; font-bold: 700; margin-top: 2rem; margin-bottom: 1rem; }
+</style>
