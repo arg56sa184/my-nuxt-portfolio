@@ -49,9 +49,12 @@ const formatDate = (dateStr) => {
           </h2>
           <div class="text-gray-600 text-sm mb-4" v-html="post.excerpt"></div>
           
-          <div class="text-emerald-500 font-semibold text-sm">
-            続きを読む →
-          </div>
+          <NuxtLink 
+  :to="`/post/${post.databaseId}`" 
+  class="inline-block text-emerald-500 font-medium hover:text-emerald-700 transition-colors"
+>
+  続きを読む →
+</NuxtLink>
         </div>
       </div>
 
