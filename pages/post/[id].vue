@@ -1,6 +1,6 @@
 <script setup>
 const route = useRoute()
-const url = 'http://arg56sa184.cloudfree.jp/blog/graphql'
+const url = 'https://arg56sa184.cloudfree.jp/blog/graphql'
 
 const query = `
   query getPost($id: ID!) {
