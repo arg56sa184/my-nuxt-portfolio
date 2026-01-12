@@ -12,6 +12,11 @@ const query = `
       title
       date
       content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
     }
   }
 `
@@ -40,6 +45,11 @@ const formatDate = (dateStr) => {
       </NuxtLink>
 
       <div v-if="data?.data?.post">
+        <img 
+    v-if="data.data.post.featuredImage" 
+    :src="data.data.post.featuredImage.node.sourceUrl" 
+    class="w-full h-64 md:h-96 object-cover rounded-xl mb-8"
+  />
         <header class="mb-8">
           <p class="text-gray-500 text-sm mb-2">{{ formatDate(data.data.post.date) }}</p>
           <h1 class="text-4xl font-bold text-gray-900 leading-tight">
