@@ -1,16 +1,17 @@
-import typography from '@tailwindcss/typography'
-
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./app.vue",
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
     "./pages/**/*.vue",
-    "./components/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./app.vue",
+    "./error.vue",
   ],
   theme: {
     extend: {},
   },
   plugins: [
-    typography,
+    require('@tailwindcss/typography'),
   ],
 }
