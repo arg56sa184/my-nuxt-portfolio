@@ -57,7 +57,8 @@ const formatDate = (dateStr) => {
           </h1>
         </header>
 
-        <div class="prose prose-xl prose-emerald lg:prose-xl max-w-none" v-html="data.data.post.content"></div>
+        <div class="prose prose-emerald lg:prose-xl max-w-none prose-a:text-emerald-600 prose-img:rounded-xl" v-html="data.data.post.content">
+</div>
       </div>
 
       <div v-else-if="error" class="text-red-500">
