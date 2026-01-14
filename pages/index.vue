@@ -17,7 +17,7 @@ const query = `
         }
       }
     }
-    news(first: 5) {
+    newses(first: 5) {
       nodes {
         databaseId
         title
