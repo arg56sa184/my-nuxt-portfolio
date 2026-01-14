@@ -3,18 +3,24 @@ const url = 'https://arg56sa184.cloudfree.jp/blog/graphql/'
 
 // queryに featuredImage を追加
 const query = `
-  query getPosts {
-    posts {
+  query getHomeData {
+    posts(first: 4) {
       nodes {
         databaseId
         title
         date
-        excerpt
         featuredImage {
           node {
             sourceUrl
           }
         }
+      }
+    }
+    newses(first: 5) { 
+      nodes {
+        databaseId
+        title
+        date
       }
     }
   }
