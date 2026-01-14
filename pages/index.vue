@@ -36,33 +36,43 @@ const formatDate = (dateStr) => {
 <template>
   <div class="min-h-screen bg-gray-50 py-12">
     <div class="max-w-4xl mx-auto px-4">
-      <header class="mb-12 text-center">
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">My Blog Portfolio</h1>
+      
+      <header class="mb-8 border-b-2 border-gray-900 pb-2">
+        <h2 class="text-2xl font-black">FEATURED</h2>
       </header>
 
-      <div v-if="data?.data?.posts?.nodes" class="grid gap-8 md:grid-cols-2">
-        <div v-for="post in data.data.posts.nodes" :key="post.databaseId" class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 flex flex-col">
-          
-          <div class="h-48 w-full bg-gray-200">
-            <img 
-              v-if="post.featuredImage" 
-              :src="post.featuredImage.node.sourceUrl" 
-              class="w-full h-full object-cover"
-              alt=""
-            />
-            <div v-else class="w-full h-full flex items-center justify-center text-gray-400">
-              No Image
+      <div v-if="data?.data?.posts?.nodes" class="grid gap-8 md:grid-cols-2 mb-16">
+        <div v-for="post in data.data.posts.nodes.slice(0, 2)" :key="post.databaseId" class="bg-white group cursor-pointer">
+          <NuxtLink :to="`/post/${post.databaseId}`">
+            <div class="aspect-video w-full bg-gray-200 overflow-hidden rounded-lg mb-4">
+              <img 
+                v-if="post.featuredImage" 
+                :src="post.featuredImage.node.sourceUrl" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
             </div>
-          </div>
-
-          <div class="p-6">
-            <span class="text-sm text-emerald-600 font-bold">{{ formatDate(post.date) }}</span>
-            <h2 class="text-xl font-bold text-gray-800 mt-2 mb-3">{{ post.title }}</h2>
-            <div class="text-gray-600 text-sm mb-4 line-clamp-2" v-html="post.excerpt"></div>
-            <NuxtLink :to="`/post/${post.databaseId}`" class="text-emerald-500 font-semibold hover:underline">続きを読む →</NuxtLink>
-          </div>
+            <h3 class="text-lg font-bold group-hover:text-emerald-600 transition-colors">{{ post.title }}</h3>
+            <p class="text-sm text-gray-500 mt-1">{{ formatDate(post.date) }}</p>
+          </NuxtLink>
         </div>
       </div>
+
+      <header class="mb-6 border-b border-gray-300 pb-2 flex justify-between items-end">
+        <h2 class="text-xl font-bold">LATEST NEWS</h2>
+        <span class="text-xs text-gray-500 font-bold">お知らせ一覧 ＞</span>
+      </header>
+
+      <div class="space-y-0">
+        <div v-for="post in data.data.posts.nodes.slice(2)" :key="post.databaseId" 
+             class="border-b border-gray-200 py-4 hover:bg-gray-100 transition-colors px-2">
+          <NuxtLink :to="`/post/${post.databaseId}`" class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+            <span class="text-sm font-mono text-gray-400">{{ formatDate(post.date) }}</span>
+            <span class="text-sm font-bold text-emerald-600 border border-emerald-600 px-2 py-0.5 rounded md:w-24 text-center text-xs">NEWS</span>
+            <h3 class="text-gray-800 font-medium flex-1">{{ post.title }}</h3>
+          </NuxtLink>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
