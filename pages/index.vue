@@ -49,7 +49,6 @@ const formatDate = (dateStr) => {
 </script>
 
 <template>
-  <pre class="text-xs bg-black text-green-400 p-4">{{ data?.data }}</pre>
   <div class="min-h-screen bg-gray-50 py-12">
     <div class="max-w-4xl mx-auto px-4">
       
