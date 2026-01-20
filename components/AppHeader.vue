@@ -3,27 +3,52 @@
     <div class="max-w-6xl mx-auto px-4">
       <div class="flex justify-between items-center h-16">
         
-        <NuxtLink to="/" class="flex items-center gap-2 group">
+        <NuxtLink to="/" class="flex items-center gap-2 group" @click="isOpen = false">
           <div class="bg-red-600 text-white px-3 py-0.5 rounded-full font-black italic tracking-tighter text-lg transition-transform group-hover:scale-105">
             MY BLOG
           </div>
         </NuxtLink>
 
         <div class="hidden md:flex items-center gap-8 text-sm font-bold text-gray-700">
-          <NuxtLink to="/" class="hover:text-red-600 transition-colors">HOME</NuxtLink>
-          <a href="#" class="hover:text-red-600 transition-colors">NEWS</a>
-          <a href="#" class="hover:text-red-600 transition-colors">TOPICS</a>
-          <a href="#" class="hover:text-red-600 transition-colors border-l pl-8 ml-4 border-gray-300">ABOUT</a>
+          <NuxtLink to="/" class="hover:text-red-600">HOME</NuxtLink>
+          <a href="#" class="hover:text-red-600">NEWS</a>
+          <a href="#" class="hover:text-red-600">TOPICS</a>
+          <a href="#" class="hover:text-red-600 border-l pl-8 ml-4 border-gray-300">ABOUT</a>
         </div>
 
-        <div class="md:hidden">
-          <button class="p-2">
-            <div class="w-6 h-0.5 bg-gray-900 mb-1"></div>
-            <div class="w-6 h-0.5 bg-gray-900 mb-1"></div>
-            <div class="w-6 h-0.5 bg-gray-900"></div>
-          </button>
-        </div>
+        <button @click="isOpen = !isOpen" class="md:hidden relative z-[60] p-2 focus:outline-none" aria-label="メニュー">
+          <div class="w-6 h-0.5 bg-gray-900 transition-all duration-300" :class="{'rotate-45 translate-y-1.5': isOpen}"></div>
+          <div class="w-6 h-0.5 bg-gray-900 my-1 transition-all duration-300" :class="{'opacity-0': isOpen}"></div>
+          <div class="w-6 h-0.5 bg-gray-900 transition-all duration-300" :class="{'-rotate-45 -translate-y-1.5': isOpen}"></div>
+        </button>
       </div>
     </div>
+
+    <transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="translate-x-full"
+      enter-to-class="translate-x-0"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="translate-x-0"
+      leave-to-class="translate-x-full"
+    >
+      <div v-if="isOpen" class="fixed inset-0 z-50 md:hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="isOpen = false"></div>
+        
+        <nav class="absolute right-0 top-0 bottom-0 w-64 bg-white shadow-xl p-8 pt-20">
+          <ul class="space-y-6 text-lg font-black italic">
+            <li><NuxtLink to="/" @click="isOpen = false" class="block hover:text-red-600 border-b pb-2">HOME</NuxtLink></li>
+            <li><a href="#" @click="isOpen = false" class="block hover:text-red-600 border-b pb-2">NEWS</a></li>
+            <li><a href="#" @click="isOpen = false" class="block hover:text-red-600 border-b pb-2">TOPICS</a></li>
+            <li><a href="#" @click="isOpen = false" class="block hover:text-red-600 border-b pb-2">ABOUT</a></li>
+          </ul>
+          <p class="mt-12 text-[10px] text-gray-400 font-bold uppercase tracking-widest text-center">© 2026 MY BLOG</p>
+        </nav>
+      </div>
+    </transition>
   </nav>
 </template>
+
+<script setup>
+const isOpen = ref(false) // メニューが開いているかどうかの状態
+</script>
