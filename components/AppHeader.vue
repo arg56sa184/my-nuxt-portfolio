@@ -33,9 +33,9 @@
       leave-to-class="translate-x-full"
     >
       <div v-if="isOpen" class="fixed inset-0 z-50 md:hidden">
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="isOpen = false"></div>
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm h-screen" @click="isOpen = false"></div>
         
-        <nav class="absolute right-0 top-0 bottom-0 w-64 bg-white shadow-xl p-8 pt-20">
+        <nav class="absolute right-0 top-0 h-screen w-64 bg-white shadow-xl p-8 pt-24 overflow-y-auto">
           <ul class="space-y-6 text-lg font-black italic">
             <li><NuxtLink to="/" @click="isOpen = false" class="block hover:text-red-600 border-b pb-2">HOME</NuxtLink></li>
             <li><a href="#" @click="isOpen = false" class="block hover:text-red-600 border-b pb-2">NEWS</a></li>
