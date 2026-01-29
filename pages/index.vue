@@ -1,7 +1,6 @@
 <script setup>
 const url = 'https://arg56sa184.cloudfree.jp/blog/graphql/'
 
-// queryに featuredImage を追加
 const query = `
   query getHomeData {
     posts(first: 4) {
@@ -16,7 +15,6 @@ const query = `
         }
       }
     }
-    # 複数形名が 'newses' の場合
     newses(first: 5, where: {status: PUBLISH}) { 
       nodes {
         databaseId
@@ -24,7 +22,6 @@ const query = `
         date
       }
     }
-    # 複数形名が 'topics' の場合
     topics(first: 5, where: {status: PUBLISH}) {
       nodes {
         databaseId
@@ -47,17 +44,13 @@ const formatDate = (dateStr) => {
   return new Date(dateStr).toLocaleDateString('ja-JP')
 }
 </script>
+
 <template>
-  <div>
+  <div class="min-h-screen bg-gray-50">
+    
     <MainVisual :items="data?.data?.posts?.nodes" />
 
-    <div class="max-w-5xl mx-auto px-4 py-12">
-      </div>
-  </div>
-</template>
-<template>
-  <div class="min-h-screen bg-gray-50 py-12">
-    <div class="max-w-4xl mx-auto px-4">
+    <div class="max-w-4xl mx-auto px-4 py-12">
       
       <section class="mb-16">
         <header class="mb-8 border-b-4 border-red-600 pb-2">
