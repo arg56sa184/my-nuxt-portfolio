@@ -47,7 +47,14 @@ const formatDate = (dateStr) => {
   return new Date(dateStr).toLocaleDateString('ja-JP')
 }
 </script>
+<template>
+  <div>
+    <MainVisual :items="data?.data?.posts?.nodes" />
 
+    <div class="max-w-5xl mx-auto px-4 py-12">
+      </div>
+  </div>
+</template>
 <template>
   <div class="min-h-screen bg-gray-50 py-12">
     <div class="max-w-4xl mx-auto px-4">
