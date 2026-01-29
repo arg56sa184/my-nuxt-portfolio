@@ -1,9 +1,9 @@
 <script setup>
+// もし動かなかった時の予備コード
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import 'swiper/css/bundle'; // これで全ての機能を一気に読み込む
 
 // 親コンポーネント（index.vue）から記事データを受け取る
 const props = defineProps({
