@@ -1,3 +1,4 @@
+<LoadingScreen />
 <template>
   <NuxtLayout>
     <NuxtPage />
