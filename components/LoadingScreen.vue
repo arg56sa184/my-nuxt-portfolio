@@ -19,11 +19,11 @@
 <script setup>
 const isLoading = ref(true);
 
-// ページ読み込み完了後に非表示にする
 onMounted(() => {
+  // 3.5秒間は強制的に表示し続ける
   setTimeout(() => {
     isLoading.value = false;
-  }, 3500); // 演出を見せるために少し長めに設定
+  }, 3500); 
 });
 
 // SVGのパスデータを抽出（簡略化のため、元のSVGのpolygonデータをパスに変換して管理）
