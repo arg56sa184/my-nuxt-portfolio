@@ -20,7 +20,7 @@
             MY BLOG
           </div>
           <p class="text-xs text-gray-500 leading-relaxed">
-            WordPress × Nuxt 3で贈る<br>任天堂風ブログプロジェクト。
+            WordPress × Nuxt 3で贈る<br>ブログ。
           </p>
         </div>
 
